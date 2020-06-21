@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import "../styles/EmployeeBody.css";
 import EmployeeAreaContext from "../utils/EmployeeAreaContext";
 
 const EmployeeBody = () => {

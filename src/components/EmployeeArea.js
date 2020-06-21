@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import EmployeeTable from "./EmployeeTable";
+import DataTable from "./EmployeeTable";
+import Nav from "./Nav";
 import API from "../utils/API";
+import "../styles/EmployeeArea.css";
 import EmployeeAreaContext from "../utils/EmployeeAreaContext";
 
-const EmployeeArea = () => {
+const DataArea = () => {
   const [developerState, setDeveloperState] = useState({
     users: [],
     order: "descend",
@@ -77,9 +79,13 @@ const EmployeeArea = () => {
 
   const handleSearchChange = event => {
     const filter = event.target.value;
+    // eslint-disable-next-line array-callback-return
     const filteredList = developerState.users.filter(item => {
-      let values = item.name.first.toLowerCase();
-      return values.indexOf(filter.toLowerCase()) !== -1;
+      let values = item.name.first.toLowerCase() + " " + item.name.last.toLowerCase();
+      console.log(filter, values)
+    if(values.indexOf(filter.toLowerCase()) !== -1){
+      return item
+    };
     });
 
     setDeveloperState({ ...developerState, filteredUsers: filteredList });
@@ -95,18 +101,19 @@ const EmployeeArea = () => {
         filteredUsers: results.data.results
       });
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <EmployeeAreaContext.Provider
       value={{ developerState, handleSearchChange, handleSort }}
     >
-      {/* <Nav /> */}
+      <Nav />
       <div className="data-area">
-        {developerState.filteredUsers.length > 0 ? <EmployeeTable /> : <div></div>}
+        {developerState.filteredUsers.length > 0 ? <DataTable /> : <div></div>}
       </div>
     </EmployeeAreaContext.Provider>
   );
 };
 
-export default EmployeeArea;
+export default DataArea;

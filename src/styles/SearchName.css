@@ -1,0 +1,8 @@
+.searchbox button {
+  border: 1px solid #0E4C59;
+}
+
+.searchbox button:hover {
+  background-color: #0E4C59;
+  color: #ffffff;
+}
