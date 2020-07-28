@@ -1,4 +1,5 @@
 # React Employee Directory
+An employee directory app built with React.js
 
 <img src="https://img.shields.io/badge/License-MIT-yellow.svg">
 
